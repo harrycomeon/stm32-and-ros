@@ -1,0 +1,21 @@
+<package>
+  <name>smartcar</name>
+  <version>1.0.0</version>
+  <description>
+    The smartcar meta package provides all the basic drivers for running and using a smartcar.
+  </description>
+  <author>Liu Yuqiang</author>
+  <maintainer email="1508366942@qq.com">Liu Yuqiang</maintainer>
+  <license>BSD</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>smartcar_bringup</run_depend>
+  <run_depend>smartcar_description</run_depend>
+  <run_depend>smartcar_teleop</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>

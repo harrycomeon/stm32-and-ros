@@ -1,0 +1,25 @@
+#%YAML:1.0
+
+
+
+#串口参数配置
+serial_port: /dev/smartcar
+serial_baud: 115200
+serial_timeout: 1
+HSF2STM: Hros_controller
+HSF2ROS: Hstm32_master
+FCS2STM: Fros_ok
+FCS2ROS: Fstm_ok
+
+
+#转速转换比例，执行速度调整比例
+convert_ratio: 1000.0
+
+#轮距车中心的间距
+wheel_distance: 0.5680859
+
+#下位机采样时间间隔 单位s
+sampling_tim: 0.020
+
+#下位机上传数据大小
+uploading_len: 26

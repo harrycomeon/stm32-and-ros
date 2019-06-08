@@ -1,0 +1,149 @@
+<?xml version='1.0'?>
+
+<robot name="smartcar" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="cameraSize" value="0.05"/>
+  <xacro:property name="cameraMass" value="0.1"/>
+  <xacro:property name="body_size" value="0.6998733 0.3998733 0.20" />  
+  <xacro:property name="body_pos" value="0 0 0.10" />  
+  <xacro:property name="wheel_radius" value="0.101" />  
+  <xacro:property name="wheel_length" value="0.05" />  
+  <xacro:property name="wheel1_pos" value="${0.6998733/2+0.025} ${0.3998733/2+0.025} 0" />  
+  <xacro:property name="wheel1_angle" value="${-M_PI/2} 0 ${-M_PI/4}" />  
+  <xacro:property name="wheel2_pos" value="${0.6998733/2+0.025} ${-0.3998733/2-0.025} 0" />  
+  <xacro:property name="wheel2_angle" value="${-M_PI/2} 0 ${M_PI/4}" />
+  <xacro:property name="wheel3_pos" value="${-0.6998733/2-0.025} ${0.3998733/2+0.025} 0" />  
+  <xacro:property name="wheel3_angle" value="${-M_PI/2} 0 ${M_PI/4}" />
+  <xacro:property name="wheel4_pos" value="${-0.6998733/2-0.025} ${-0.3998733/2-0.025} 0" />  
+  <xacro:property name="wheel4_angle" value="${-M_PI/2} 0 ${-M_PI/4}" />
+  <xacro:property name="M_PI" value="3.1415926535897931" /> 
+  <xacro:include filename="$(find smartcar_description)/urdf/robots/smartcar.gazebo" />
+  
+ <xacro:macro name="default_inertial" params="mass">
+       <inertial>
+              <mass value="${mass}" />
+              <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+      </inertial>
+    </xacro:macro>
+
+<xacro:macro name="wheel" params="wheelname position angle">  
+    <joint name="${wheelname}_joint" type="continuous">  
+      <parent link="base_link"/>  
+      <child link="${wheelname}"/> 
+      <origin rpy="${angle}" xyz="${position}" />
+      <axis xyz="0 0 1"/> 
+    </joint>  
+    <link name="${wheelname}">  
+      <visual>  
+        <geometry>  
+          <cylinder length="${wheel_length}" radius="${wheel_radius}"/>  
+        </geometry>  
+        <origin rpy="0 0 0" xyz="0 0 0"/>  
+        <material name="black">  
+          <color rgba="0 0 0 1"/>  
+        </material>  
+      </visual>  
+      <collision>  
+      <geometry>  
+         <cylinder length="${wheel_length}" radius="${wheel_radius}"/>  
+      </geometry>  
+      <origin rpy="0 0 0" xyz="0 0 0"/>  
+    </collision>  
+    <inertial>  
+      <origin  xyz="0 0 0"/>  
+      <mass value="0.1" />  
+       <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>  
+    </inertial>  
+    </link>  
+  </xacro:macro>  
+
+  <xacro:wheel wheelname="left_front_wheel" position="${wheel1_pos}" angle="${wheel1_angle}"/>  
+  <xacro:wheel wheelname="right_front_wheel" position="${wheel2_pos}" angle="${wheel2_angle}"/>  
+  <xacro:wheel wheelname="left_back_wheel" position="${wheel3_pos}" angle="${wheel3_angle}"/>  
+  <xacro:wheel wheelname="right_back_wheel" position="${wheel4_pos}" angle="${wheel4_angle}"/> 
+
+<link name="base_footprint">
+</link>
+
+<joint name="base_joint" type="fixed">
+        <origin rpy="0 0 0"  xyz="0 0 0.058" />
+        <parent link="base_footprint" />
+        <child link="base_link" />
+</joint>
+
+  <link name="base_link">
+        <visual>
+            <geometry>
+                    <box size="${body_size}"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="${body_pos}"/>
+            <material name="orange">
+                <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                    <box size="${body_size}"/>
+            </geometry>
+        </collision>
+        <xacro:default_inertial mass="10"/>
+    </link>
+
+  <!--<link name="camera">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+    <inertial>
+      <mass value="${cameraMass}" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <box_inertia m="${cameraMass}" x="${cameraSize}" y="${cameraSize}" z="${cameraSize}" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz=".2 0 0" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera"/>
+  </joint>-->
+
+  <!-- Hokuyo Laser -->
+  <!--<link name="hokuyo">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://neurobot_description/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz=".15 0 .1" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo"/>
+  </joint>-->
+
+</robot>
+
