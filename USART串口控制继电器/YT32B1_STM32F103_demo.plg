@@ -1,0 +1,47 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+H:\USART串口控制继电器程序\YT32B1_STM32F103_demo.uvproj
+Project File Date:  06/08/2019
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling sys.c...
+linking...
+Program Size: Code=11768 RO-data=784 RW-data=48 ZI-data=1632  
+FromELF: creating hex file...
+".\YT32B1_STM32F103_demo.axf" - 0 Errors, 0 Warning(s).
+Load "H:\\USART串口控制继电器程序\\YT32B1_STM32F103_demo.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+linking...
+Program Size: Code=11768 RO-data=784 RW-data=48 ZI-data=1632  
+FromELF: creating hex file...
+".\YT32B1_STM32F103_demo.axf" - 0 Errors, 0 Warning(s).
+Load "H:\\USART串口控制继电器程序\\YT32B1_STM32F103_demo.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling led.c...
+linking...
+Program Size: Code=11768 RO-data=784 RW-data=48 ZI-data=1632  
+FromELF: creating hex file...
+".\YT32B1_STM32F103_demo.axf" - 0 Errors, 0 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: Code=11816 RO-data=784 RW-data=48 ZI-data=1632  
+FromELF: creating hex file...
+".\YT32B1_STM32F103_demo.axf" - 0 Errors, 0 Warning(s).
+Load "H:\\USART串口控制继电器程序\\YT32B1_STM32F103_demo.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
